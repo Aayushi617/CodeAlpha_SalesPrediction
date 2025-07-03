@@ -38,7 +38,8 @@ y_pred = model.predict(X_test)
 
 r2 = metrics.r2_score(y_test, y_pred)
 mae = metrics.mean_absolute_error(y_test, y_pred)
-rmse = metrics.mean_squared_error(y_test, y_pred, squared=False)
+rmse = metrics.mean_squared_error(y_test, y_pred) ** 0.5
+
 
 st.subheader("📌 Model Evaluation")
 st.markdown(f"- **R² Score:** {r2:.2f}")
