@@ -30,14 +30,7 @@ fig1, ax1 = plt.subplots()
 sns.heatmap(df.corr(), annot=True, cmap="coolwarm", ax=ax1)
 st.pyplot(fig1)
 
-# ---- 2. Pairplot (All Features) ----
-st.subheader("🔗 Pairplot: Relationships Between All Variables")
-sns_plot = sns.pairplot(df)
-buf = io.BytesIO()
-sns_plot.savefig(buf, format="png")
-st.image(buf)
-
-# ---- 3. Feature vs Sales: TV, Radio, Newspaper ----
+# ---- 2. Feature vs Sales: TV, Radio, Newspaper ----
 st.subheader("📈 Advertising Spend vs Sales")
 fig2, ax2 = plt.subplots(1, 3, figsize=(18, 5))
 
@@ -55,7 +48,7 @@ st.pyplot(fig2)
 # ---- Feature Engineering for Bar Plot ----
 df['TV_Level'] = ['High' if x > df['TV'].median() else 'Low' for x in df['TV']]
 
-# ---- 4. Bar Plot: Avg Sales by TV Spend Level ----
+# ---- 3. Bar Plot: Avg Sales by TV Spend Level ----
 st.subheader("📊 Average Sales: High vs Low TV Budget")
 avg_sales_by_tv = df.groupby('TV_Level')['Sales'].mean().reset_index()
 fig3, ax3 = plt.subplots()
@@ -74,7 +67,7 @@ model = LinearRegression()
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
-# ---- 5. Actual vs Predicted Plot ----
+# ---- 4. Actual vs Predicted Plot ----
 st.subheader("📉 Actual vs Predicted Sales")
 result_df = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
 fig4, ax4 = plt.subplots()
@@ -85,7 +78,7 @@ ax4.set_ylabel("Predicted Sales")
 ax4.set_title("Actual vs Predicted Sales")
 st.pyplot(fig4)
 
-# ---- 6. Residual Plot ----
+# ---- 5. Residual Plot ----
 st.subheader("📉 Residual Plot")
 residuals = y_test - y_pred
 fig5, ax5 = plt.subplots()
